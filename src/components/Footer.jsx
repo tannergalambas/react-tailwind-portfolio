@@ -1,0 +1,31 @@
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+
+const Footer = () => {
+  return (
+    <footer className="py-6 text-center text-sm text-gray-400 bg-[#0f172a] flex flex-col items-center gap-2">
+      <p>
+        © {new Date().getFullYear()} Tanner Galambas · Built with React, Tailwind CSS, and Framer Motion · Hosted on Vercel
+      </p>
+      <div className="flex gap-4 text-xl">
+        <a
+          href="https://github.com/tannergalambas"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-white transition-colors duration-200"
+        >
+          <FaGithub />
+        </a>
+        <a
+          href="https://www.linkedin.com/in/tanner-galambas/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-blue-400 transition-colors duration-200"
+        >
+          <FaLinkedin />
+        </a>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;

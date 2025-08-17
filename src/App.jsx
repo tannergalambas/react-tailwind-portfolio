@@ -4,6 +4,8 @@ import TechStack from "./components/TechStack";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Navbar from "./components/Navbar";
+import ScrollToTopButton from "./components/ScrollToTopButton";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -13,33 +15,63 @@ function App() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="pt-24 min-h-screen flex flex-col items-center bg-gradient-to-b from-white via-slate-100 to-white px-4 text-center"
+        className="pt-24 min-h-screen flex flex-col items-center px-4 text-center"
       >
-        <img
+        <motion.img
           src={me}
           alt="Tanner Galambas"
-          className="w-40 h-40 rounded-full object-cover mb-6 shadow-lg"
+          className="w-40 h-40 rounded-full object-cover mb-6 shadow-lg transition duration-300 hover:shadow-[0_0_25px_rgba(147,197,253,0.8)]"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
         />
-        <h1 className="text-2xl font-bold">Tanner Galambas</h1>
-        <p className="text-gray-700 mt-2">
-          Front-End Developer | React & WordPress Specialist
-        </p>
-        <p className="text-gray-600 mt-1 max-w-md">
-          I build responsive, accessible websites that are fast, modern, and user-friendly.
-          Based in Austin, TX.
-        </p>
+        <motion.h1
+          className="text-4xl font-bold tracking-wide mb-2 text-indigo-400"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          Tanner Galambas
+        </motion.h1>
+        <motion.p
+          className="text-lg text-slate-200 mb-1"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          Front-End Developer · React & WordPress Specialist
+        </motion.p>
+        <motion.p
+          className="text-slate-300 max-w-xl mt-2 leading-relaxed"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+        >
+          I build fast, responsive, and accessible websites with modern tools like React, Tailwind, and WordPress — focused on user experience and performance. Based in Austin, TX.
+        </motion.p>
 
-        {/* Sections */}
-        <section id="tech">
+        <motion.a
+          href="#contact"
+          className="mt-6 inline-block bg-blue-600 text-white px-6 py-2 rounded-full shadow hover:bg-blue-700 transition"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+        >
+          Get in Touch
+        </motion.a>
+
+        <section id="tech" className="w-full mt-24">
           <TechStack />
         </section>
-        <section id="about">
+        <section id="about" className="w-full mt-24">
           <About />
         </section>
-        <section id="contact">
+        <section id="contact" className="w-full mt-24">
           <Contact />
         </section>
       </motion.div>
+      <ScrollToTopButton />
+      <Footer />
     </>
   );
 }

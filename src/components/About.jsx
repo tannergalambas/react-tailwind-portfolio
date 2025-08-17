@@ -9,7 +9,7 @@ const About = () => {
       transition={{ duration: 0.8 }}
     >
       <h2 className="text-3xl font-semibold mb-4">About Me</h2>
-      <p className="text-gray-700 text-lg leading-relaxed">
+      <p className="text-slate-300 text-center max-w-2xl mx-auto leading-relaxed">
         I'm a front-end developer based in Austin, Texas, passionate about building clean, responsive websites with modern tools like React and Tailwind CSS. 
         I care about performance, accessibility, and making the web more usable and engaging.
       </p>
