@@ -33,7 +33,6 @@ The site is designed to reflect both clean development practices and modern web 
 - 🦮 WCAG-compliant accessible design
 - 🔍 SEO-optimized with proper meta tags and Open Graph/Twitter cards
 - 🧩 Modular, component-based structure for easy updates
-- 📬 Contact form with direct-to-email support via EmailJS
 
 ---
 
