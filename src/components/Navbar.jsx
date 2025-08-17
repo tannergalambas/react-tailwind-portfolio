@@ -7,7 +7,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleLinkClick = () => {
-    setIsOpen(false); // Close menu when a link is clicked
+    setIsOpen(false);
   };
 
   return (
@@ -31,8 +31,26 @@ const Navbar = () => {
           </a>
         </div>
 
-        {/* Mobile Hamburger */}
-        <div className="md:hidden">
+        {/* Mobile Right Section: GitHub + LinkedIn + Hamburger */}
+        <div className="md:hidden flex items-center space-x-4">
+          <a
+            href="https://github.com/tannergalambas"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-blue-400 transition"
+            aria-label="GitHub"
+          >
+            <FaGithub size={20} />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/tanner-galambas/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-blue-400 transition"
+            aria-label="LinkedIn"
+          >
+            <FaLinkedin size={20} />
+          </a>
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="focus:outline-none"
@@ -41,7 +59,7 @@ const Navbar = () => {
             {isOpen ? <HiX size={28} /> : <HiMenu size={28} />}
           </button>
         </div>
-      </div>
+      </div> {/* ✅ This closes the main flex container */}
 
       {/* Animated Mobile Menu */}
       <AnimatePresence>
@@ -58,12 +76,6 @@ const Navbar = () => {
             <a onClick={handleLinkClick} href="#contact" className="block hover:text-blue-400">Contact</a>
             <a onClick={handleLinkClick} href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="block hover:text-blue-400">
               Resume
-            </a>
-            <a href="https://github.com/tannergalambas" target="_blank" rel="noopener noreferrer" className="block hover:text-blue-400 flex items-center gap-2">
-              <FaGithub /> GitHub
-            </a>
-            <a href="https://www.linkedin.com/in/tanner-galambas/" target="_blank" rel="noopener noreferrer" className="block hover:text-blue-400 flex items-center gap-2">
-              <FaLinkedin /> LinkedIn
             </a>
           </motion.div>
         )}

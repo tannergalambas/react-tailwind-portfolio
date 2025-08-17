@@ -61,13 +61,13 @@ function App() {
           Get in Touch
         </motion.a>
 
-        <section id="tech" className="w-full mt-24">
+        <section id="tech" className="w-full mt-4">
           <TechStack />
         </section>
-        <section id="about" className="w-full mt-24">
+        <section id="about" className="w-full mt-4">
           <About />
         </section>
-        <section id="contact" className="w-full mt-24">
+        <section id="contact" className="w-full mt-4">
           <Contact />
         </section>
       </motion.div>
