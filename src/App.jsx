@@ -6,6 +6,7 @@ import Contact from "./components/Contact";
 import Navbar from "./components/Navbar";
 import ScrollToTopButton from "./components/ScrollToTopButton";
 import Footer from "./components/Footer";
+import { Analytics } from "@vercel/analytics/react";
 
 function App() {
   return (
@@ -72,6 +73,7 @@ function App() {
       </motion.div>
       <ScrollToTopButton />
       <Footer />
+      <Analytics />
     </>
   );
 }
