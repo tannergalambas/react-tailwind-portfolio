@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar";
 import ScrollToTopButton from "./components/ScrollToTopButton";
 import Footer from "./components/Footer";
 import { Analytics } from "@vercel/analytics/react";
+import GithubShowcase from "./components/GithubShowcase";
 
 function App() {
   return (
@@ -64,13 +65,27 @@ function App() {
         <section id="tech" className="w-full mt-4">
           <TechStack />
         </section>
+
         <section id="about" className="w-full mt-4">
           <About />
         </section>
-        <section id="contact" className="w-full mt-4">
+
+        <section id="activity" className="w-full mt-8 px-4">
+          <div className="max-w-6xl mx-auto">
+          <h2 className="text-2xl font-bold mb-4 text-center text-slate-100">
+          Featured Projects
+          </h2>
+
+        {/* GithubShowcase renders its own responsive grid */}
+          <GithubShowcase user="tannergalambas" limit={6} />
+        </div>
+</section>
+
+        <section id="contact" className="w-full mt-8">
           <Contact />
         </section>
       </motion.div>
+
       <ScrollToTopButton />
       <Footer />
       <Analytics />
