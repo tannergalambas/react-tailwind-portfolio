@@ -1,0 +1,99 @@
+{
+    "basics": {
+      "name": "Tanner Galambas",
+      "label": "Junior Developer",
+      "location": "Austin, TX",
+      "email": "tanner.galambas@gmail.com",
+      "phone": "702-338-6994",
+      "url": "https://www.tannergalambas.com",
+      "summary": "Frontend Developer with experience optimizing web platforms for performance, accessibility, and user engagement. Skilled in WordPress, React, and modern front-end practices. Adept at SEO, analytics, and collaborating across teams to deliver conversion-optimized solutions."
+    },
+    "profiles": [
+      { "network": "LinkedIn", "url": "https://www.linkedin.com/in/tanner-galambas/" },
+      { "network": "GitHub", "url": "https://github.com/tannergalambas" },
+      { "network": "Portfolio", "url": "https://www.tannergalambas.com" }
+    ],
+    "skills": [
+      {
+        "name": "Front-End Development",
+        "keywords": ["HTML", "CSS", "JavaScript", "React", "Tailwind CSS"]
+      },
+      {
+        "name": "Content Management Systems",
+        "keywords": ["WordPress (Elementor & Avada)", "Strapi", "Squarespace", "Ektron"]
+      },
+      {
+        "name": "SEO & Analytics",
+        "keywords": ["On-page SEO", "Metadata structuring", "Google Analytics GA4", "Siteimprove"]
+      },
+      {
+        "name": "UX & Testing",
+        "keywords": ["Conversion rate optimization", "Landing page design", "A/B & multivariate testing"]
+      },
+      {
+        "name": "Tools",
+        "keywords": ["Jira", "GitHub", "Figma", "Slack"]
+      }
+    ],
+    "work": [
+      {
+        "company": "Intellibright",
+        "position": "Junior WordPress Developer (Frontend Developer)",
+        "location": "Austin, TX",
+        "startDate": "2025-04",
+        "endDate": null,
+        "highlights": [
+          "Developed and edited websites using WordPress, Elementor, and Avada page builders, enhancing user engagement and client satisfaction.",
+          "Collaborated with designers and project managers to deliver conversion-optimized experiences on time.",
+          "Conducted QA testing and optimized websites for performance and accessibility.",
+          "Implemented SEO-friendly structures and tracked performance via GA4 and analytics tools.",
+          "Integrated and customized WooCommerce features, improving eCommerce usability and sales."
+        ],
+        "tech": ["WordPress", "Elementor", "Avada", "WooCommerce", "SEO", "Accessibility", "GA4"]
+      },
+      {
+        "company": "Nevada Department of Education",
+        "position": "IT Professional II – Website Administrator",
+        "location": "Las Vegas, NV (Remote)",
+        "startDate": "2022-04",
+        "endDate": "2024-11",
+        "highlights": [
+          "Increased organic web traffic by 30% through SEO enhancements and content optimization.",
+          "Led A/B and multivariate testing to refine website usability and engagement.",
+          "Published press releases, policy updates, and official announcements with clear governance.",
+          "Built performance dashboards with GA4 and Siteimprove for leadership reporting.",
+          "Maintained CMS platforms (Strapi, Ektron) and ensured accessibility compliance."
+        ],
+        "tech": ["Strapi", "Ektron", "SEO", "GA4", "Siteimprove", "Accessibility"]
+      },
+      {
+        "company": "Keene Media LLC",
+        "position": "Content Manager",
+        "location": "Henderson, NV",
+        "startDate": "2018-06",
+        "endDate": "2022-04",
+        "highlights": [
+          "Directed content strategy and digital storefront operations for engagement and sales growth.",
+          "Boosted sales conversions with promotions and discount campaigns.",
+          "Resolved CMS technical issues and maintained Squarespace sites."
+        ],
+        "tech": ["Squarespace", "Content strategy", "Digital storefronts"]
+      }
+    ],
+    "education": [
+      {
+        "institution": "University of Nevada, Reno",
+        "area": "Information Systems",
+        "studyType": "Bachelor of Science",
+        "startDate": "2016-08",
+        "endDate": "2020-05"
+      }
+    ],
+    "certifications": [
+      {
+        "title": "Meta Front-End Developer Certificate",
+        "issuer": "Coursera",
+        "date": "2025-04"
+      }
+    ]
+  }

@@ -5,3 +5,22 @@
 body {
   @apply bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-slate-100;
 }
+
+/* Print: force black-on-white + solid borders */
+@media print {
+  nav, footer, .no-print { display: none !important; }
+  body { background: #fff !important; }
+  .resume, .resume * { color: #000 !important; background: transparent !important; }
+  .resume a { text-decoration: underline; }
+  .resume article { border-color: #000 !important; }
+}
+
+/* Respect OS reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
