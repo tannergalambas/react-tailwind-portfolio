@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import emailjs from "@emailjs/browser";
 import { Mail, MapPin, Clock, Download, Github, Linkedin } from "lucide-react";
 import { Input } from "@/components/ui/Input";
-import { Textarea } from "@/components/ui/textarea";
+import { Textarea } from "@/components/ui/Textarea";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Controller } from "react-hook-form";
