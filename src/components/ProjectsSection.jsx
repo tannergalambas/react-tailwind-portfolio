@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Github, ExternalLink } from "lucide-react";
-import ProjectCard from "@/components/ui/project-card.jsx";
+import ProjectCard from "@/components/ui/ProjectCard.jsx";
 import { useGitHubProjects } from "@/hooks/use-github-projects.jsx";
 
 const projectFilters = [
