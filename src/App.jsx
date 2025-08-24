@@ -7,7 +7,8 @@ import Navbar from "./components/Navbar";
 import ScrollToTopButton from "./components/ScrollToTopButton";
 import Footer from "./components/Footer";
 import { Analytics } from "@vercel/analytics/react";
-import GithubShowcase from "./components/GithubShowcase";
+//import GithubShowcase from "./components/GithubShowcase";
+import ProjectsSection from "@/components/ProjectsSection";
 
 function App() {
   return (
@@ -54,7 +55,7 @@ function App() {
 
         <motion.a
           href="#contact"
-          className="mt-6 inline-block bg-blue-600 text-white px-6 py-2 rounded-full shadow hover:bg-blue-700 transition"
+          className="mt-2 inline-block bg-blue-600 text-white px-6 py-2 rounded-full shadow hover:bg-blue-700 transition"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
@@ -62,26 +63,27 @@ function App() {
           Get in Touch
         </motion.a>
 
-        <section id="tech" className="w-full mt-4">
+        <section id="tech" className="w-full mt-2">
           <TechStack />
         </section>
 
-        <section id="about" className="w-full mt-4">
+        <section id="about" className="w-full mt-2">
           <About />
         </section>
 
-        <section id="activity" className="w-full mt-8 px-4">
-          <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl font-bold mb-4 text-center text-slate-100">
-          Featured Projects
-          </h2>
+        <section id="activity" className="w-full mt-8 px-2">
+  <div className="max-w-6xl mx-auto">
+    {/* <h2 className="text-2xl font-bold mb-4 text-center text-slate-100">
+      Featured Projects
+    </h2> */}
 
-        {/* GithubShowcase renders its own responsive grid */}
-          <GithubShowcase user="tannergalambas" limit={6} />
-        </div>
+    {/* <GithubShowcase user="tannergalambas" limit={6} /> */}
+
+    <ProjectsSection />
+  </div>
 </section>
 
-        <section id="contact" className="w-full mt-8">
+        <section id="contact" className="w-full mt-2">
           <Contact />
         </section>
       </motion.div>
