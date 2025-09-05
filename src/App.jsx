@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import me from "./assets/me.jpeg";
+import headshot4x5 from "./assets/tan-headshot-4x5.jpg";
+import headshot4x5_3x from "./assets/tan-headshot-4x5@3x.jpg";
 import TechStack from "./components/TechStack";
 import About from "./components/About";
 import Contact from "./components/Contact";
@@ -7,7 +8,6 @@ import Navbar from "./components/Navbar";
 import ScrollToTopButton from "./components/ScrollToTopButton";
 import Footer from "./components/Footer";
 import { Analytics } from "@vercel/analytics/react";
-//import GithubShowcase from "./components/GithubShowcase";
 import ProjectsSection from "@/components/ProjectsSection";
 
 function App() {
@@ -20,14 +20,21 @@ function App() {
         transition={{ duration: 0.6 }}
         className="pt-24 min-h-screen flex flex-col items-center px-4 text-center"
       >
-        <motion.img
-          src={me}
-          alt="Tanner Galambas"
-          className="w-40 h-40 rounded-full object-cover mb-6 shadow-lg transition duration-300 hover:shadow-[0_0_25px_rgba(147,197,253,0.8)]"
+        <motion.div
+          className="w-40 aspect-[4/5] rounded-2xl overflow-hidden mb-6 shadow-lg transition duration-300 hover:shadow-[0_0_25px_rgba(147,197,253,0.8)]"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-        />
+        >
+          <img
+            src={headshot4x5}
+            srcSet={`${headshot4x5} 320w, ${headshot4x5_3x} 480w`}
+            sizes="160px"
+            alt="Tanner Galambas"
+            className="w-full h-full object-cover object-center"
+            loading="lazy"
+          />
+        </motion.div>
         <motion.h1
           className="text-4xl font-bold tracking-wide mb-2 text-indigo-400"
           initial={{ opacity: 0, y: -10 }}
@@ -73,12 +80,7 @@ function App() {
 
         <section id="activity" className="w-full mt-8 px-2">
   <div className="max-w-6xl mx-auto">
-    {/* <h2 className="text-2xl font-bold mb-4 text-center text-slate-100">
-      Featured Projects
-    </h2> */}
-
-    {/* <GithubShowcase user="tannergalambas" limit={6} /> */}
-
+    {/* Featured Projects */}
     <ProjectsSection />
   </div>
 </section>
