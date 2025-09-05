@@ -8,7 +8,8 @@ export default function ProjectCard({ project }) {
         src={project.image}
         alt={project.title}
         loading="lazy"
-        className={`rounded-md mb-4 w-full h-40 ${
+        decoding="async"
+        className={`rounded-md mb-4 w-full h-48 ${
           project.imageFit === 'contain' ? 'object-contain p-3' : 'object-cover'
         }`}
       />
@@ -25,13 +26,25 @@ export default function ProjectCard({ project }) {
 </div>
       <div className="mt-auto flex gap-3 items-center">
         {project.github && (
-          <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-500 hover:underline flex items-center">
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`View code for ${project.title} on GitHub`}
+            className="text-sm text-blue-500 hover:underline flex items-center"
+          >
             <Github className="h-4 w-4 mr-1" />
             Code
           </a>
         )}
         {project.demo && (
-          <a href={project.demo} target="_blank" rel="noopener noreferrer" className="text-sm text-green-500 hover:underline flex items-center">
+          <a
+            href={project.demo}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Open live site for ${project.title}`}
+            className="text-sm text-green-500 hover:underline flex items-center"
+          >
             <ExternalLink className="h-4 w-4 mr-1" />
             Live
           </a>

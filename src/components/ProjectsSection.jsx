@@ -10,7 +10,6 @@ const featuredProjects = [
     image: "/images/little-lemon-logo.png",
     imageFit: "contain",
     tags: ["React", "JavaScript", "CSS3"],
-    category: ["react", "javascript"],
     github: "https://github.com/tannergalambas/little-lemon-capstone",
     demo: "https://lemon.tannergalambas.com/",
     isMock: true
@@ -21,7 +20,6 @@ const featuredProjects = [
     description: "A React clone of Imperial Tide’s band site, featuring a clean, responsive design with multi-page routing.",
     image: "/images/tide-band.jpg",
     tags: ["React", "JavaScript"],
-    category: ["react", "javascript"],
     github: "https://github.com/tannergalambas/imperial-tide",
     demo: "https://tide.tannergalambas.com/",
     badgeLabel: "UI Clone"
@@ -30,9 +28,8 @@ const featuredProjects = [
     id: "react-tailwind-portfolio",
     title: "React Tailwind Portfolio",
     description: "Personal portfolio built with React and Tailwind CSS showcasing modern design patterns and responsive layouts.",
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=300",
+    image: "/images/portfolio-cover.svg",
     tags: ["React", "TailwindCSS", "JavaScript"],
-    category: ["react", "javascript"],
     github: "https://github.com/tannergalambas/react-tailwind-portfolio",
     demo: null,
     isCurrent: true

@@ -1,5 +1,6 @@
 // src/components/Resume.jsx
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 
 /* ----------------------------- tiny utils ----------------------------- */
@@ -179,6 +180,13 @@ function Certifications({ certs = [] }) {
 
 /* ------------------------------ main view ----------------------------- */
 export default function Resume() {
+  const location = useLocation();
+  useEffect(() => {
+    if (window.gtag) {
+      window.gtag('config', 'G-8CDYWW6YVE', { page_path: location.pathname });
+    }
+  }, [location.pathname]);
+
   const { data, loading, err } = useResumeData();
 
   if (loading) return <p className="py-8 text-center">Loading resume…</p>;

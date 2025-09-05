@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import headshot4x5 from "./assets/tan-headshot-4x5.jpg";
 import headshot4x5_3x from "./assets/tan-headshot-4x5@3x.jpg";
 import TechStack from "./components/TechStack";
@@ -9,8 +11,17 @@ import ScrollToTopButton from "./components/ScrollToTopButton";
 import Footer from "./components/Footer";
 import { Analytics } from "@vercel/analytics/react";
 import ProjectsSection from "@/components/ProjectsSection";
+import { Toaster } from "@/components/ui/toaster";
 
 function App() {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (window.gtag) {
+      window.gtag('config', 'G-8CDYWW6YVE', { page_path: location.pathname });
+    }
+  }, [location.pathname]);
+
   return (
     <>
       <Navbar />
@@ -21,7 +32,7 @@ function App() {
         className="pt-24 min-h-screen flex flex-col items-center px-4 text-center"
       >
         <motion.div
-          className="w-40 aspect-[4/5] rounded-2xl overflow-hidden mb-6 shadow-lg transition duration-300 hover:shadow-[0_0_25px_rgba(147,197,253,0.8)]"
+          className="w-36 sm:w-40 md:w-48 aspect-[4/5] rounded-2xl overflow-hidden mb-6 shadow-lg transition duration-300 hover:shadow-[0_0_25px_rgba(147,197,253,0.8)]"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -92,6 +103,7 @@ function App() {
 
       <ScrollToTopButton />
       <Footer />
+      <Toaster />
       <Analytics />
     </>
   );
