@@ -16,7 +16,13 @@ const Navbar = () => {
   return (
     <nav className="w-full py-4 bg-gray-900 text-white shadow-md fixed top-0 z-50">
       <div className="max-w-6xl mx-auto px-4 flex justify-between items-center">
-        <h1 className="text-xl font-bold">Tanner Galambas</h1>
+        <a
+          href="/#main"
+          className="text-xl font-bold hover:text-blue-400 transition"
+          aria-label="Go to top of homepage"
+        >
+          Tanner Galambas
+        </a>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center space-x-6 text-sm">
