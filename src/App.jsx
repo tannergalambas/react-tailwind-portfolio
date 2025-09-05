@@ -16,19 +16,22 @@ import { Toaster } from "@/components/ui/toaster";
 function App() {
   const location = useLocation();
 
-  useEffect(() => {
-    if (window.gtag) {
-      window.gtag('config', 'G-8CDYWW6YVE', { page_path: location.pathname });
-    }
-  }, [location.pathname]);
-
   return (
     <>
+      {/* Skip link for keyboard users */}
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only absolute left-2 top-2 z-[100] bg-white text-black px-3 py-1 rounded shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+      >
+        Skip to content
+      </a>
       <Navbar />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
+        id="main"
+        role="main"
         className="pt-24 min-h-screen flex flex-col items-center px-4 text-center"
       >
         <motion.div
@@ -40,7 +43,10 @@ function App() {
           <img
             src={headshot4x5}
             srcSet={`${headshot4x5} 320w, ${headshot4x5_3x} 480w`}
-            sizes="160px"
+            sizes="(min-width: 768px) 192px, (min-width: 640px) 160px, 144px"
+            width="480"
+            height="600"
+            fetchpriority="high"
             alt="Tanner Galambas"
             className="w-full h-full object-cover object-center"
             loading="lazy"

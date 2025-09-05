@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tanner Galambas | Front‑End Developer (React, Tailwind, WordPress) — Austin, TX</title>
+    <link rel="canonical" href="https://www.tannergalambas.com/" />
+    <meta name="theme-color" content="#0f172a" />
 
     <!-- SEO Meta -->
     <meta name="description" content="Front‑End Developer specializing in React, Tailwind, and WordPress. Based in Austin, TX. I build accessible, high‑performance web experiences." />
@@ -30,8 +32,24 @@
     dataLayer.push(arguments);
   }
   gtag('js', new Date());
-  gtag('config', 'G-8CDYWW6YVE');
+  // Defer initial page_view to router tracking
+  gtag('config', 'G-8CDYWW6YVE', { send_page_view: false });
 </script>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Tanner Galambas",
+        "jobTitle": "Front-End Developer",
+        "url": "https://www.tannergalambas.com/",
+        "sameAs": [
+          "https://github.com/tannergalambas",
+          "https://www.linkedin.com/in/tanner-galambas/"
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

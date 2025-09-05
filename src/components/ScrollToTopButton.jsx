@@ -21,6 +21,7 @@ function ScrollToTopButton() {
       <button
         onClick={scrollToTop}
         className="fixed bottom-6 right-6 p-3 rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow-lg transition-opacity duration-300"
+        aria-label="Scroll to top"
       >
         <FaArrowUp />
       </button>

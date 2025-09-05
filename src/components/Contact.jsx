@@ -27,6 +27,11 @@ export default function Contact() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  // EmailJS credentials from env (Vite)
+  const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+  const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+  const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
   const {
     register,
     handleSubmit,
@@ -40,18 +45,30 @@ export default function Contact() {
   const onSubmit = async (data) => {
     setIsLoading(true);
     try {
-      const { consent, ...emailData } = data;
+      // Basic spam prevention: honeypot check
+      if (data.company) {
+        // Silently succeed for bots to avoid retries
+        setIsSubmitted(true);
+        reset();
+        return;
+      }
+
+      const { consent, company, ...emailData } = data;
+
+      if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+        throw new Error("Missing EmailJS environment variables");
+      }
 
       await emailjs.send(
-        "service_hl5nevp",
-        "template_z0h6or3",
+        SERVICE_ID,
+        TEMPLATE_ID,
         {
           name: `${data.firstName} ${data.lastName}`,
           email: data.email,
           project_type: data.projectType,
           message: data.message,
         },
-        "v3z2DNYWQV7NbXhz_"
+        PUBLIC_KEY
       );
 
       setIsSubmitted(true);
@@ -98,44 +115,61 @@ export default function Contact() {
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Form */}
           <form ref={formRef} onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            {/* Honeypot field (hidden from users, visible to bots) */}
+            <div style={{ position: 'absolute', left: '-10000px', top: 'auto', width: 1, height: 1, overflow: 'hidden' }} aria-hidden="true">
+              <label htmlFor="company">Company</label>
+              <input id="company" type="text" tabIndex="-1" autoComplete="off" {...register("company")} />
+            </div>
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <Label>First Name *</Label>
+                <Label htmlFor="firstName">First Name *</Label>
                 <Input
+                  id="firstName"
+                  aria-invalid={!!errors.firstName}
+                  aria-describedby={errors.firstName ? "firstName-error" : undefined}
                   {...register("firstName")}
                   className={`w-full rounded-md px-3 py-2 ${
                     errors.firstName ? "border-red-500 bg-red-900" : "bg-[#1e293b]"
                   }`}
                 />
-                {errors.firstName && <p className="text-sm text-red-500">{errors.firstName.message}</p>}
+                {errors.firstName && <p id="firstName-error" className="text-sm text-red-500">{errors.firstName.message}</p>}
               </div>
               <div>
-                <Label>Last Name *</Label>
+                <Label htmlFor="lastName">Last Name *</Label>
                 <Input
+                  id="lastName"
+                  aria-invalid={!!errors.lastName}
+                  aria-describedby={errors.lastName ? "lastName-error" : undefined}
                   {...register("lastName")}
                   className={`w-full rounded-md px-3 py-2 ${
                     errors.lastName ? "border-red-500 bg-red-900" : "bg-[#1e293b]"
                   }`}
                 />
-                {errors.lastName && <p className="text-sm text-red-500">{errors.lastName.message}</p>}
+                {errors.lastName && <p id="lastName-error" className="text-sm text-red-500">{errors.lastName.message}</p>}
               </div>
             </div>
 
             <div>
-              <Label>Email *</Label>
+              <Label htmlFor="email">Email *</Label>
               <Input
+                id="email"
                 type="email"
+                aria-invalid={!!errors.email}
+                aria-describedby={errors.email ? "email-error" : undefined}
                 {...register("email")}
                 className={`w-full rounded-md px-3 py-2 ${
                   errors.email ? "border-red-500 bg-red-900" : "bg-[#1e293b]"
                 }`}
               />
-              {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
+              {errors.email && <p id="email-error" className="text-sm text-red-500">{errors.email.message}</p>}
             </div>
 
             <div>
-              <Label>Project Type</Label>
+              <Label htmlFor="projectType">Project Type</Label>
               <select
+                id="projectType"
+                aria-invalid={!!errors.projectType}
+                aria-describedby={errors.projectType ? "projectType-error" : undefined}
                 {...register("projectType")}
                 className={`w-full rounded-md border border-border bg-[#1e293b] px-3 py-2 text-sm text-white placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                   errors.projectType ? "border-red-500 bg-red-900" : ""
@@ -146,19 +180,22 @@ export default function Contact() {
                 <option value="Design">Design</option>
                 <option value="Consultation">Consultation</option>
               </select>
-              {errors.projectType && <p className="text-sm text-red-500">{errors.projectType.message}</p>}
+              {errors.projectType && <p id="projectType-error" className="text-sm text-red-500">{errors.projectType.message}</p>}
             </div>
 
             <div>
-              <Label>Message *</Label>
+              <Label htmlFor="message">Message *</Label>
               <Textarea
+                id="message"
                 rows={4}
+                aria-invalid={!!errors.message}
+                aria-describedby={errors.message ? "message-error" : undefined}
                 {...register("message")}
                 className={`w-full rounded-md px-3 py-2 ${
                   errors.message ? "border-red-500 bg-red-900" : "bg-[#1e293b]"
                 }`}
               />
-              {errors.message && <p className="text-sm text-red-500">{errors.message.message}</p>}
+              {errors.message && <p id="message-error" className="text-sm text-red-500">{errors.message.message}</p>}
             </div>
 
             <Controller
@@ -248,7 +285,7 @@ export default function Contact() {
                     <p className="text-sm text-gray-300">Get a detailed overview of my experience</p>
                   </div>
                   <a
-                    href="/resume.pdf"
+                    href={`${import.meta.env.BASE_URL}resume.pdf`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-slate-700 hover:bg-slate-600 text-gray-200 px-3 py-1 rounded-md flex items-center text-sm"

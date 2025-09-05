@@ -1,5 +1,5 @@
 // src/main.jsx
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { injectSpeedInsights } from '@vercel/speed-insights';
@@ -7,14 +7,25 @@ import { injectSpeedInsights } from '@vercel/speed-insights';
 injectSpeedInsights();
 
 import App from "./App";              // homepage
-import Resume from "./components/Resume"; // resume page
+const Resume = lazy(() => import("./components/Resume")); // resume page (lazy)
+import Root from "./Root";
 import "./styles/index.css";
 
 // Define routes
 const router = createBrowserRouter([
-  { path: "/", element: <App /> },
-  { path: "/resume", element: <Resume /> },
-  { path: "*", element: <div className="p-6">404 Not Found</div> } // fallback
+  {
+    path: "/",
+    element: <Root />,
+    children: [
+      { index: true, element: <App /> },
+      { path: "resume", element: (
+        <Suspense fallback={<div className="p-6">Loading…</div>}>
+          <Resume />
+        </Suspense>
+      ) },
+      { path: "*", element: <div className="p-6">404 Not Found</div> },
+    ],
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
