@@ -20,6 +20,8 @@ const contactSchema = z.object({
   projectType: z.string().min(1, "Please select a project type"),
   message: z.string().min(1, "Message is required"),
   consent: z.boolean().refine(val => val, "Consent is required"),
+  // Honeypot (optional)
+  company: z.string().optional(),
 });
 
 export default function Contact() {
@@ -74,9 +76,13 @@ export default function Contact() {
       setIsSubmitted(true);
       reset();
     } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      const hint = message.includes("Missing EmailJS")
+        ? "Email service is not configured. Please try again later."
+        : "Please try again later.";
       toast({
         title: "Failed to send message",
-        description: "Please try again later.",
+        description: hint,
         variant: "destructive",
       });
     } finally {

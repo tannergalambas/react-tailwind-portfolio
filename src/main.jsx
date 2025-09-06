@@ -4,7 +4,10 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { injectSpeedInsights } from '@vercel/speed-insights';
 
-injectSpeedInsights();
+// Only enable Speed Insights in production
+if (import.meta.env.PROD) {
+  injectSpeedInsights();
+}
 
 import App from "./App";              // homepage
 const Resume = lazy(() => import("./components/Resume")); // resume page (lazy)

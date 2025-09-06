@@ -110,7 +110,7 @@ function App() {
       <ScrollToTopButton />
       <Footer />
       <Toaster />
-      <Analytics />
+      {import.meta.env.PROD && <Analytics />}
     </>
   );
 }
