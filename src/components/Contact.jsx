@@ -31,7 +31,7 @@ export default function Contact() {
           </div>
           <div className="mt-4">
             <label htmlFor="projectType" className="block text-sm text-slate-300">Project Type</label>
-            <select id="projectType" name="projectType" className="mt-1 w-full rounded-md bg-slate-800/70 px-3 py-2 text-slate-100 border border-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <select id="projectType" name="projectType" required className="mt-1 w-full rounded-md bg-slate-800/70 px-3 py-2 text-slate-100 border border-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500">
               <option value="">Select a project type</option>
               <option>Web Development</option>
               <option>Design</option>
