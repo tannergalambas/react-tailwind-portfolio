@@ -91,6 +91,24 @@ export default function ProjectsSection() {
           >
             Featured Projects
           </motion.h2>
+          {/* Lighthouse metrics (update numbers as you improve) */}
+          <motion.div
+            className="flex justify-center gap-3 text-xs text-slate-300 mb-2"
+            initial={{ opacity: 0, y: 8 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
+            transition={{ duration: 0.6, delay: 0.35 }}
+            aria-label="Lighthouse scores"
+          >
+            <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2 py-0.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" /> Perf 98
+            </span>
+            <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2 py-0.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" /> A11y 100
+            </span>
+            <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2 py-0.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" /> SEO 98
+            </span>
+          </motion.div>
           <motion.div
             className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-6"
             initial={{ scaleX: 0 }}

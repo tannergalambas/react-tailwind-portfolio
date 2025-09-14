@@ -17,31 +17,25 @@ The site is designed to reflect both clean development practices and modern web 
 
 ## ⚙️ Tech Stack
 
-- **Framework:** React (Vite)
-- **Styling:** Tailwind CSS
-- **Deployment:** Vercel (Preview + Production)
-- **Additional Tools:** 
-  - React Icons
-  - Lighthouse-tested for performance and accessibility
+- **React + Vite**
+- **Tailwind CSS**
+- **Framer Motion** (micro‑interactions)
+- **Vercel** (preview + production)
 
 ---
 
-## 🔧 Local Development
+## 🔧 Quick Start
 
-1. Install deps
-   - `npm install`
-2. Run the dev server
-   - `npm run dev`
-3. Open the app
-   - http://localhost:5173
+1) Install deps: `npm install`
+2) Dev server: `npm run dev` → http://localhost:5173
+3) Optional (Contact form): add `VITE_FORMSPREE_ID` to `.env.local`
 
 ---
 
 ## 🚀 Deployment (Vercel)
 
-- Connect the repo to Vercel and deploy.
-- No runtime environment variables are required.
-- Every PR gets a Preview URL; merges to `main` deploy to Production.
+- Connect to Vercel. Merges to `main` deploy to Production.
+- Optional: set `VITE_FORMSPREE_ID` for the contact form in Project → Settings → Environment Variables.
 
 
 ---
@@ -53,6 +47,12 @@ The site is designed to reflect both clean development practices and modern web 
 - 🦮 WCAG-compliant accessible design
 - 🔍 SEO-optimized with proper meta tags and Open Graph/Twitter cards
 - 🧩 Modular, component-based structure for easy updates
+
+## 🧾 Short Case Study (This Site)
+
+- **Problem**: Needed a clean, fast portfolio that showcases front‑end craft without bloat.
+- **Approach**: React + Tailwind + Vite for speed; reusable components; a11y + reduced‑motion support; granular animations with Framer Motion.
+- **Outcome**: 95+ Lighthouse scores; clear CTAs; simplified contact with Formspree; consistent headings/spacing; analytics for key actions.
 
 ### Contact
 

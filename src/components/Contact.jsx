@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useForm, ValidationError } from "@formspree/react";
 import { MapPin, Clock } from "lucide-react";
 
@@ -6,6 +7,12 @@ export default function Contact() {
   const mailto = `mailto:${email}?subject=Project%20Inquiry&body=Hi%20Tanner,%0D%0A%0D%0AI'd%20like%20to%20discuss%20a%20project.%0D%0AProject%20Type:%20%0D%0ATimeline:%20%0D%0ABudget:%20%0D%0A%0D%0AThanks!`;
   const formId = import.meta.env.VITE_FORMSPREE_ID || "mjkedkpp";
   const [state, handleSubmit] = useForm(formId);
+  // Track successful submits
+  useEffect(() => {
+    if (state.succeeded && typeof window !== 'undefined' && typeof window.gtag === 'function') {
+      window.gtag('event', 'contact_submit', { method: 'formspree' });
+    }
+  }, [state.succeeded]);
 
   return (
     <section className="py-10 px-4 sm:px-6 lg:px-8">
@@ -60,7 +67,17 @@ export default function Contact() {
           {!state.succeeded && (
             <p className="mt-3 text-sm text-slate-300">
               Or email me directly →{' '}
-              <a className="text-blue-300 underline" href={mailto}>{email}</a>
+              <a
+                className="text-blue-300 underline"
+                href={mailto}
+                onClick={() => {
+                  if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+                    window.gtag('event', 'contact_mailto_click', { location: 'contact_fallback' });
+                  }
+                }}
+              >
+                {email}
+              </a>
             </p>
           )}
         </form>

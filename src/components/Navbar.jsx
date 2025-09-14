@@ -46,6 +46,11 @@ const Navbar = () => {
             className="hidden md:inline-flex items-center gap-1 rounded bg-blue-600 px-3 py-1 text-xs text-white font-medium hover:bg-blue-700 transition"
             aria-label="Download Resume (PDF)"
             title="Download Resume (PDF)"
+            onClick={() => {
+              if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+                window.gtag('event', 'resume_pdf_click', { location: 'navbar_desktop' });
+              }
+            }}
           >
             Resume (PDF)
           </a>
@@ -126,7 +131,12 @@ const Navbar = () => {
 
             {/* Mobile Resume PDF */}
             <a
-              onClick={handleLinkClick}
+              onClick={(e) => {
+                if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+                  window.gtag('event', 'resume_pdf_click', { location: 'navbar_mobile' });
+                }
+                handleLinkClick(e);
+              }}
               href={`${import.meta.env.BASE_URL}resume.pdf`}
               target="_blank"
               rel="noreferrer"
