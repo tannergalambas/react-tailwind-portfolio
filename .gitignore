@@ -1,6 +1,7 @@
 # dependencies
 node_modules/
 .env
+.env*
 
 # build
 dist/
@@ -18,3 +19,4 @@ yarn-error.log*
 # IDEs
 .vscode/
 .idea/.DS_Store
+.vercel

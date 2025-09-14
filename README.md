@@ -30,20 +30,17 @@ The site is designed to reflect both clean development practices and modern web 
 
 1. Install deps
    - `npm install`
-2. Configure environment variables
-   - Copy `.env.example` to `.env.local` and fill in values:
-     - `VITE_EMAILJS_SERVICE_ID`
-     - `VITE_EMAILJS_TEMPLATE_ID`
-     - `VITE_EMAILJS_PUBLIC_KEY`
-3. Run
+2. Run the dev server
    - `npm run dev`
+3. Open the app
+   - http://localhost:5173
 
 ---
 
 ## 🚀 Deployment (Vercel)
 
-- Connect the repo to Vercel.
-- Add the environment variables in Vercel Project Settings → Environment Variables (use the same `VITE_` names).
+- Connect the repo to Vercel and deploy.
+- No runtime environment variables are required.
 - Every PR gets a Preview URL; merges to `main` deploy to Production.
 
 
@@ -56,5 +53,10 @@ The site is designed to reflect both clean development practices and modern web 
 - 🦮 WCAG-compliant accessible design
 - 🔍 SEO-optimized with proper meta tags and Open Graph/Twitter cards
 - 🧩 Modular, component-based structure for easy updates
+
+### Contact
+
+- Simple, reliable CTAs instead of a fragile client-side form:
+  - “Email Me” (mailto), “Copy Email”, and “Resume (PDF)” buttons.
 
 ---

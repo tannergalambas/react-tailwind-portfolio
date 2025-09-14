@@ -1,10 +1,11 @@
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
+  const year = new Date().getFullYear();
   return (
     <footer className="py-6 text-center text-sm text-gray-400 bg-[#0f172a] flex flex-col items-center gap-2">
       <p>
-        © {new Date().getFullYear()} Tanner Galambas · Built with React, Tailwind CSS, and Framer Motion · Hosted on Vercel
+        © {year} Tanner Galambas · Built with React, Tailwind CSS, Framer Motion, and Vite · Hosted on Vercel
       </p>
       <div className="flex gap-4 text-xl">
         <a

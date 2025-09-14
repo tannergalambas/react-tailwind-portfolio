@@ -5,6 +5,7 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { FiDownload } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import { NavLink } from "react-router-dom";
+import Logo from "/logo.svg";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,10 +19,11 @@ const Navbar = () => {
       <div className="max-w-6xl mx-auto px-4 flex justify-between items-center">
         <a
           href="/#main"
-          className="text-xl font-bold hover:text-blue-400 transition"
+          className="flex items-center gap-2 text-xl font-bold hover:text-blue-400 transition"
           aria-label="Go to top of homepage"
         >
-          Tanner Galambas
+          <img src={Logo} alt="TG logo" className="h-7 w-7" />
+          <span>Tanner Galambas</span>
         </a>
 
         {/* Desktop Nav */}
