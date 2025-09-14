@@ -20,16 +20,23 @@ function App() {
 
   // Support deep-linking to sections when arriving from other routes
   useEffect(() => {
-    if (location.hash) {
-      const id = location.hash.slice(1);
-      const el = document.getElementById(id);
-      if (el) {
-        // slight delay allows layout to settle before scrolling
-        setTimeout(() => {
-          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 0);
-      }
-    }
+    if (!location.hash) return;
+    const id = location.hash.slice(1);
+    const el = document.getElementById(id);
+    if (!el) return;
+    // slight delay allows layout to settle before measuring position
+    setTimeout(() => {
+      const nav = document.querySelector('nav');
+      const navH = nav?.offsetHeight || 64;
+      // Extra buffer per-section so the heading doesn't crowd the navbar
+      let adjust = 24; // default
+      if (id === 'tech') adjust = 36; // bring Tech heading higher into view
+      else if (id === 'about') adjust = 44; // nudge About up slightly
+      else if (id === 'contact') adjust = 40;
+      else if (id === 'projects') adjust = 32;
+      const top = el.getBoundingClientRect().top + window.pageYOffset - navH + adjust;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }, 0);
   }, [location.pathname, location.hash]);
 
   return (
@@ -193,7 +200,7 @@ function App() {
         </motion.div>
       </motion.div>
 
-      <section id="tech" className="w-full mt-2 scroll-mt-24">
+      <section id="tech" className="w-full mt-2 scroll-mt-36">
         <TechStack />
       </section>
 
@@ -201,14 +208,21 @@ function App() {
         <About />
       </section>
 
-      <section id="projects" className="w-full mt-2 px-2">
+      {/* Performance section stands alone */}
+      <section id="performance" className="w-full mt-2 px-2">
         <div className="max-w-6xl mx-auto">
           <PerfAccessibility />
+        </div>
+      </section>
+
+      {/* Projects anchor lands at the actual list */}
+      <section id="projects" className="w-full mt-2 px-2">
+        <div className="max-w-6xl mx-auto">
           <ProjectsSection />
         </div>
       </section>
 
-      <section id="contact" className="w-full mt-2">
+      <section id="contact" className="w-full mt-2 scroll-mt-16">
         <Contact />
       </section>
 
