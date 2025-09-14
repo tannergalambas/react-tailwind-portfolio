@@ -47,27 +47,27 @@ export default function PerfAccessibility() {
         </motion.div>
 
         {/* Feature blurbs */}
-        <div className="grid sm:grid-cols-3 gap-8 text-left">
-          <div className="bg-white/5 border border-white/10 rounded-xl p-6">
-            <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 mb-3">
-              <Rocket className="h-5 w-5 text-white" />
+        <div className="grid sm:grid-cols-3 gap-8 text-center">
+          <div>
+            <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-purple-600 mb-3">
+              <Rocket className="h-6 w-6 text-white" />
             </div>
             <div className="font-semibold text-slate-100 mb-1">Fast Loading</div>
-            <p className="text-sm text-slate-300">Optimized assets, code‑splitting, and lazy loading for quick page loads.</p>
+            <p className="text-sm text-slate-300 max-w-xs mx-auto">Optimized assets, code‑splitting, and lazy loading for quick page loads.</p>
           </div>
-          <div className="bg-white/5 border border-white/10 rounded-xl p-6">
-            <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-r from-emerald-500 to-teal-500 mb-3">
-              <Accessibility className="h-5 w-5 text-white" />
+          <div>
+            <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 mb-3">
+              <Accessibility className="h-6 w-6 text-white" />
             </div>
             <div className="font-semibold text-slate-100 mb-1">Accessible Design</div>
-            <p className="text-sm text-slate-300">Semantic HTML, ARIA labels, keyboard navigation, and reduced‑motion support.</p>
+            <p className="text-sm text-slate-300 max-w-xs mx-auto">Semantic HTML, ARIA labels, keyboard navigation, and reduced‑motion support.</p>
           </div>
-          <div className="bg-white/5 border border-white/10 rounded-xl p-6">
-            <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-r from-pink-500 to-orange-500 mb-3">
-              <Smartphone className="h-5 w-5 text-white" />
+          <div>
+            <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-pink-500 to-orange-500 mb-3">
+              <Smartphone className="h-6 w-6 text-white" />
             </div>
             <div className="font-semibold text-slate-100 mb-1">Responsive</div>
-            <p className="text-sm text-slate-300">Mobile‑first layouts that look great on any screen size.</p>
+            <p className="text-sm text-slate-300 max-w-xs mx-auto">Mobile‑first layouts that look great on any screen size.</p>
           </div>
         </div>
       </div>
