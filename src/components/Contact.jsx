@@ -1,45 +1,57 @@
+import { useState } from "react";
+import { useForm, ValidationError } from "@formspree/react";
 import { Mail, MapPin, Clock, Download } from "lucide-react";
 
 export default function Contact() {
   const email = "tanner.galambas@gmail.com";
   const mailto = `mailto:${email}?subject=Project%20Inquiry&body=Hi%20Tanner,%0D%0A%0D%0AI'd%20like%20to%20discuss%20a%20project.%0D%0AProject%20Type:%20%0D%0ATimeline:%20%0D%0ABudget:%20%0D%0A%0D%0AThanks!`;
-
-  const copyEmail = async () => {
-    try {
-      await navigator.clipboard?.writeText(email);
-    } catch {}
-  };
+  const formId = import.meta.env.VITE_FORMSPREE_ID || "mjkedkpp";
+  const [state, handleSubmit] = useForm(formId);
 
   return (
     <section className="py-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="text-3xl sm:text-4xl font-bold dark:text-white mb-6">Let's Work Together</h2>
         <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-violet-600 mx-auto mb-6" />
-        
-
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a
-            href={mailto}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold shadow hover:from-blue-700 hover:to-purple-700 transition"
-          >
-            <Mail className="h-4 w-4" /> Email Me
-          </a>
-          <a
-            href={`${import.meta.env.BASE_URL}resume.pdf`}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/20 text-white hover:bg-white/10 transition"
-          >
-            <Download className="h-4 w-4" /> Resume (PDF)
-          </a>
-          <button
-            onClick={copyEmail}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/20 text-white hover:bg-white/10 transition"
-            type="button"
-          >
-            Copy Email
-          </button>
-        </div>
+        <form onSubmit={handleSubmit} className="mx-auto max-w-3xl text-left bg-[#1e293b] rounded-2xl p-6 shadow">
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label htmlFor="name" className="block text-sm text-slate-300">Your Name</label>
+              <input id="name" name="name" required className="mt-1 w-full rounded-md bg-slate-800/70 px-3 py-2 text-slate-100 border border-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            </div>
+            <div>
+              <label htmlFor="email" className="block text-sm text-slate-300">Email</label>
+              <input id="email" name="email" type="email" required className="mt-1 w-full rounded-md bg-slate-800/70 px-3 py-2 text-slate-100 border border-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+              <ValidationError prefix="Email" field="email" errors={state.errors} />
+            </div>
+          </div>
+          <div className="mt-4">
+            <label htmlFor="projectType" className="block text-sm text-slate-300">Project Type</label>
+            <select id="projectType" name="projectType" className="mt-1 w-full rounded-md bg-slate-800/70 px-3 py-2 text-slate-100 border border-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <option value="">Select a project type</option>
+              <option>Web Development</option>
+              <option>Design</option>
+              <option>Consultation</option>
+            </select>
+          </div>
+          <div className="mt-4">
+            <label htmlFor="message" className="block text-sm text-slate-300">Message</label>
+            <textarea id="message" name="message" rows={4} required className="mt-1 w-full rounded-md bg-slate-800/70 px-3 py-2 text-slate-100 border border-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <ValidationError prefix="Message" field="message" errors={state.errors} />
+          </div>
+          <div className="mt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <button type="submit" disabled={state.submitting} className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-3 font-semibold text-white shadow hover:from-blue-700 hover:to-purple-700 transition disabled:opacity-50">
+              {state.submitting ? 'Sending…' : state.succeeded ? 'Sent!' : 'Send Message'}
+            </button>
+            <div className="flex gap-3 justify-center">
+              <a href={mailto} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 text-white hover:bg-white/10 transition"><Mail className="h-4 w-4" />Email</a>
+              <a href={`${import.meta.env.BASE_URL}resume.pdf`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 text-white hover:bg-white/10 transition"><Download className="h-4 w-4" />Resume</a>
+            </div>
+          </div>
+          {state.succeeded && (
+            <p className="mt-3 text-sm text-emerald-300">Thanks! Your message was sent.</p>
+          )}
+        </form>
 
         <div className="mt-10 grid sm:grid-cols-3 gap-6 text-left">
           <div className="bg-[#1e293b] rounded-2xl p-6 text-white">
