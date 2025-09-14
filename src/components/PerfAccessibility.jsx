@@ -36,7 +36,7 @@ export default function PerfAccessibility() {
           {[{label:'Performance',score:98},{label:'Accessibility',score:100},{label:'Best Practices',score:100},{label:'SEO',score:98}].map((m, i) => (
             <div key={m.label} className="flex flex-col items-center text-center">
               <div className="relative w-24 h-24 mb-2">
-                <LighthouseScore score={m.score} color="#22c55e" size={96} thickness={10} delay={i*150} />
+                <LighthouseScore score={m.score} color="#22c55e" size={96} thickness={6} delay={i*150} />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span className="text-lg font-semibold text-white">{m.score}</span>
                 </div>

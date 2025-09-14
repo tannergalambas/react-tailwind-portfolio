@@ -1,18 +1,25 @@
-export default function LighthouseScore({ score = 100, color = "#22c55e", size = 96, thickness = 10, delay = 0 }) {
+export default function LighthouseScore({ score = 100, color = "#22c55e", size = 96, thickness = 6, track = "#334155", delay = 0 }) {
   const pct = Math.max(0, Math.min(100, score));
-  const angle = (pct / 100) * 360;
-  const ringColor = color;
-  const bgTrack = "#334155"; // slate-700
+  const r = (size - thickness) / 2;
+  const c = 2 * Math.PI * r;
+  const dash = (pct / 100) * c;
 
-  const style = {
-    width: size,
-    height: size,
-    background: `conic-gradient(${ringColor} ${angle}deg, ${bgTrack} 0)` ,
-    WebkitMask: `radial-gradient(farthest-side, transparent calc(50% - ${thickness}px), #000 calc(50% - ${thickness - 1}px))`,
-    mask: `radial-gradient(farthest-side, transparent calc(50% - ${thickness}px), #000 calc(50% - ${thickness - 1}px))`,
-    animationDelay: `${delay}ms`,
-  };
-
-  return <div aria-hidden className="rounded-full" style={style} />;
+  return (
+    <svg width={size} height={size} style={{ animationDelay: `${delay}ms` }} aria-hidden>
+      {/* track */}
+      <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke={track} strokeWidth={thickness} />
+      {/* progress arc */}
+      <circle
+        cx={size / 2}
+        cy={size / 2}
+        r={r}
+        fill="none"
+        stroke={color}
+        strokeWidth={thickness}
+        strokeLinecap="round"
+        strokeDasharray={`${dash} ${c - dash}`}
+        transform={`rotate(-90 ${size / 2} ${size / 2})`}
+      />
+    </svg>
+  );
 }
-
