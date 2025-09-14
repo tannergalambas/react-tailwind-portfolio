@@ -16,8 +16,12 @@ export default function Contact() {
         <form onSubmit={handleSubmit} className="mx-auto max-w-3xl text-left bg-[#1e293b] rounded-2xl p-6 shadow">
           <div className="grid sm:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="name" className="block text-sm text-slate-300">Your Name</label>
-              <input id="name" name="name" required className="mt-1 w-full rounded-md bg-slate-800/70 px-3 py-2 text-slate-100 border border-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+              <label htmlFor="firstName" className="block text-sm text-slate-300">First Name</label>
+              <input id="firstName" name="firstName" autoComplete="given-name" required className="mt-1 w-full rounded-md bg-slate-800/70 px-3 py-2 text-slate-100 border border-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            </div>
+            <div>
+              <label htmlFor="lastName" className="block text-sm text-slate-300">Last Name</label>
+              <input id="lastName" name="lastName" autoComplete="family-name" required className="mt-1 w-full rounded-md bg-slate-800/70 px-3 py-2 text-slate-100 border border-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500" />
             </div>
             <div>
               <label htmlFor="email" className="block text-sm text-slate-300">Email</label>
@@ -39,6 +43,13 @@ export default function Contact() {
             <textarea id="message" name="message" rows={4} required className="mt-1 w-full rounded-md bg-slate-800/70 px-3 py-2 text-slate-100 border border-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500" />
             <ValidationError prefix="Message" field="message" errors={state.errors} />
           </div>
+          <div className="mt-4">
+            <label className="inline-flex items-center gap-2 text-sm text-slate-300">
+              <input type="checkbox" name="consent" value="yes" required className="h-4 w-4 rounded border border-white/20 bg-slate-800/70 text-blue-600 focus:ring-blue-500" />
+              I agree to be contacted about this project.
+            </label>
+          </div>
+
           <div className="mt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <button type="submit" disabled={state.submitting} className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-3 font-semibold text-white shadow hover:from-blue-700 hover:to-purple-700 transition disabled:opacity-50">
               {state.submitting ? 'Sending…' : state.succeeded ? 'Sent!' : 'Send Message'}
