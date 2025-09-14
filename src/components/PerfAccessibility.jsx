@@ -1,50 +1,6 @@
 import { motion } from "framer-motion";
 import { Rocket, Accessibility, Smartphone } from "lucide-react";
-
-function ScoreRing({ score = 100, label = "", color = "#22c55e" }) {
-  const pct = Math.max(0, Math.min(100, score));
-  const size = 80;
-  const stroke = 8;
-  const radius = (size - stroke) / 2;
-  const circumference = 2 * Math.PI * radius;
-  const dash = (pct / 100) * circumference;
-
-  return (
-    <div className="flex flex-col items-center text-center">
-      <svg width={size} height={size} className="mb-2">
-        <circle
-          cx={size / 2}
-          cy={size / 2}
-          r={radius}
-          fill="none"
-          stroke="#1f2937"
-          strokeWidth={stroke}
-        />
-        <circle
-          cx={size / 2}
-          cy={size / 2}
-          r={radius}
-          fill="none"
-          stroke={color}
-          strokeWidth={stroke}
-          strokeLinecap="round"
-          strokeDasharray={`${dash} ${circumference - dash}`}
-          transform={`rotate(-90 ${size / 2} ${size / 2})`}
-        />
-        <text
-          x="50%"
-          y="50%"
-          dominantBaseline="middle"
-          textAnchor="middle"
-          className="fill-white font-semibold"
-        >
-          {pct}
-        </text>
-      </svg>
-      <div className="text-sm font-semibold text-slate-100">{label}</div>
-    </div>
-  );
-}
+import LighthouseScore from "@/components/ui/lighthouse-score.jsx";
 
 export default function PerfAccessibility() {
   return (
@@ -77,10 +33,17 @@ export default function PerfAccessibility() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          <ScoreRing score={98} label="Performance" color="#22c55e" />
-          <ScoreRing score={100} label="Accessibility" color="#22c55e" />
-          <ScoreRing score={100} label="Best Practices" color="#22c55e" />
-          <ScoreRing score={98} label="SEO" color="#22c55e" />
+          {[{label:'Performance',score:98},{label:'Accessibility',score:100},{label:'Best Practices',score:100},{label:'SEO',score:98}].map((m, i) => (
+            <div key={m.label} className="flex flex-col items-center text-center">
+              <div className="relative w-24 h-24 mb-2">
+                <LighthouseScore score={m.score} color="#22c55e" size={96} thickness={10} delay={i*150} />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-lg font-semibold text-white">{m.score}</span>
+                </div>
+              </div>
+              <div className="text-sm font-semibold text-slate-100">{m.label}</div>
+            </div>
+          ))}
         </motion.div>
 
         {/* Feature blurbs */}
@@ -111,4 +74,3 @@ export default function PerfAccessibility() {
     </section>
   );
 }
-
