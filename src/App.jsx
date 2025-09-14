@@ -13,6 +13,7 @@ import { Analytics } from "@vercel/analytics/react";
 import ProjectsSection from "@/components/ProjectsSection";
 import BackgroundParticles from "@/components/BackgroundParticles";
 import Typewriter from "@/components/Typewriter";
+import PerfAccessibility from "@/components/PerfAccessibility";
 
 function App() {
   const location = useLocation();
@@ -202,6 +203,7 @@ function App() {
 
       <section id="projects" className="w-full mt-2 px-2">
         <div className="max-w-6xl mx-auto">
+          <PerfAccessibility />
           <ProjectsSection />
         </div>
       </section>
