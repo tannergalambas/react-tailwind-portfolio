@@ -1,6 +1,7 @@
 // src/components/Resume.jsx
 import { useEffect, useState } from "react";
 import Navbar from "./Navbar";
+import { useTitle } from "@/hooks/useTitle";
 
 /* ----------------------------- tiny utils ----------------------------- */
 function monthName(m) {
@@ -180,6 +181,7 @@ function Certifications({ certs = [] }) {
 /* ------------------------------ main view ----------------------------- */
 export default function Resume() {
   const { data, loading, err } = useResumeData();
+  useTitle("Resume | Tanner Galambas");
 
   if (loading) return <p className="py-8 text-center">Loading resume…</p>;
   if (err) return <p className="py-8 text-center text-red-600">Failed to load resume.</p>;

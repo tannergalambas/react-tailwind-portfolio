@@ -3,10 +3,12 @@ import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { injectSpeedInsights } from '@vercel/speed-insights';
+import { reportWebVitals } from './analytics/reportWebVitals';
 
 // Only enable Speed Insights in production
 if (import.meta.env.PROD) {
   injectSpeedInsights();
+  reportWebVitals();
 }
 
 import App from "./App";              // homepage

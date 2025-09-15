@@ -14,9 +14,11 @@ import ProjectsSection from "@/components/ProjectsSection";
 import BackgroundParticles from "@/components/BackgroundParticles";
 import Typewriter from "@/components/Typewriter";
 import PerfAccessibility from "@/components/PerfAccessibility";
+import { useTitle } from "@/hooks/useTitle";
 
 function App() {
   const location = useLocation();
+  useTitle("Tanner Galambas | Front‑End Developer — Austin, TX");
 
   // Support deep-linking to sections when arriving from other routes
   useEffect(() => {
