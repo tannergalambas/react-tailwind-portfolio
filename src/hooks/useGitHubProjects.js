@@ -4,6 +4,7 @@ const DEFAULT_OPTIONS = {
   username: "tannergalambas",
   perPage: 6,
   sort: "pushed",
+  enabled: true,
 };
 
 const token = import.meta.env.VITE_GITHUB_TOKEN?.trim();
@@ -15,14 +16,22 @@ const GITHUB_HEADERS = {
 };
 
 export function useGitHubProjects(options = {}) {
-  const { username, perPage, sort } = { ...DEFAULT_OPTIONS, ...options };
+  const { username, perPage, sort, enabled } = { ...DEFAULT_OPTIONS, ...options };
   const [state, setState] = useState({
     data: [],
-    isLoading: true,
+    isLoading: enabled,
     error: null,
   });
 
   useEffect(() => {
+    if (!enabled) {
+      setState((prev) => ({
+        ...prev,
+        isLoading: false,
+      }));
+      return;
+    }
+
     const controller = new AbortController();
 
     async function fetchProjects() {
@@ -142,7 +151,7 @@ export function useGitHubProjects(options = {}) {
     fetchProjects();
 
     return () => controller.abort();
-  }, [username, perPage, sort]);
+  }, [username, perPage, sort, enabled]);
 
   return state;
 }

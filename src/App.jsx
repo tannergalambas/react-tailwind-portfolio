@@ -1,8 +1,14 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import headshot4x5 from "./assets/tan-headshot-4x5.jpg";
-import headshot4x5_3x from "./assets/tan-headshot-4x5@3x.jpg";
+import headshotAvif320 from "./assets/tan-headshot-4x5-320.avif";
+import headshotAvif640 from "./assets/tan-headshot-4x5-640.avif";
+import headshotAvif960 from "./assets/tan-headshot-4x5-960.avif";
+import headshotWebp320 from "./assets/tan-headshot-4x5-320.webp";
+import headshotWebp640 from "./assets/tan-headshot-4x5-640.webp";
+import headshotWebp960 from "./assets/tan-headshot-4x5-960.webp";
+import headshotJpg640 from "./assets/tan-headshot-4x5-640.jpg";
+import headshotJpgRetina from "./assets/tan-headshot-4x5@3x.jpg";
 import TechStack from "./components/TechStack";
 import About from "./components/About";
 import Contact from "./components/Contact";
@@ -29,18 +35,35 @@ function App() {
     if (!el) return;
     // slight delay allows layout to settle before measuring position
     setTimeout(() => {
-      const nav = document.querySelector('nav');
+      const nav = document.querySelector("nav");
       const navH = nav?.offsetHeight || 64;
       // Extra buffer per-section so the heading doesn't crowd the navbar
       let adjust = 24; // default
-      if (id === 'tech') adjust = 36; // bring Tech heading higher into view
-      else if (id === 'about') adjust = 44; // nudge About up slightly
-      else if (id === 'contact') adjust = 40;
-      else if (id === 'projects') adjust = 32;
+      if (id === "tech") adjust = 36; // bring Tech heading higher into view
+      else if (id === "about") adjust = 44; // nudge About up slightly
+      else if (id === "contact") adjust = 40;
+      else if (id === "projects") adjust = 32;
       const top = el.getBoundingClientRect().top + window.pageYOffset - navH + adjust;
-      window.scrollTo({ top, behavior: 'smooth' });
+      window.scrollTo({ top, behavior: "smooth" });
     }, 0);
   }, [location.pathname, location.hash]);
+
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    const preload = document.createElement("link");
+    preload.rel = "preload";
+    preload.as = "image";
+    preload.href = headshotAvif640;
+    preload.imagesrcset = `${headshotAvif320} 1x, ${headshotAvif640} 2x, ${headshotAvif960} 3x`;
+    preload.imagesizes = "(min-width: 768px) 320px, 288px";
+    document.head.appendChild(preload);
+
+    return () => {
+      if (preload.parentNode) {
+        preload.parentNode.removeChild(preload);
+      }
+    };
+  }, []);
 
   return (
     <>
@@ -167,16 +190,29 @@ function App() {
                     reduceMotion ? { duration: 0 } : { duration: 3, repeat: Infinity, ease: "easeInOut" }
                   }
                 />
-                <img
-                  src={headshot4x5}
-                  srcSet={`${headshot4x5} 320w, ${headshot4x5_3x} 480w`}
-                  sizes="(min-width: 768px) 320px, 288px"
-                  width="480"
-                  height="600"
-                  fetchpriority="high"
-                  alt="Tanner Galambas"
-                  className="w-full h-full object-cover object-center relative z-10"
-                />
+                <picture className="w-full h-full block relative z-10">
+                  <source
+                    type="image/avif"
+                    srcSet={`${headshotAvif320} 1x, ${headshotAvif640} 2x, ${headshotAvif960} 3x`}
+                    sizes="(min-width: 768px) 320px, 288px"
+                  />
+                  <source
+                    type="image/webp"
+                    srcSet={`${headshotWebp320} 1x, ${headshotWebp640} 2x, ${headshotWebp960} 3x`}
+                    sizes="(min-width: 768px) 320px, 288px"
+                  />
+                  <img
+                    src={headshotJpg640}
+                    srcSet={`${headshotJpg640} 1x, ${headshotJpgRetina} 2x`}
+                    sizes="(min-width: 768px) 320px, 288px"
+                    width="640"
+                    height="800"
+                    fetchpriority="high"
+                    decoding="sync"
+                    alt="Portrait of Tanner Galambas smiling"
+                    className="w-full h-full object-cover object-center"
+                  />
+                </picture>
               </motion.div>
             </motion.div>
           </div>

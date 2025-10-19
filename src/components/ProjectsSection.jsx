@@ -1,6 +1,6 @@
 import { Github } from "lucide-react";
 import { motion, useInView } from "framer-motion";
-import { useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import ProjectCard from "@/components/ui/ProjectCard.jsx";
 import { useGitHubProjects } from "@/hooks/useGitHubProjects.js";
 
@@ -176,8 +176,22 @@ function createGradientFromName(name) {
 export default function ProjectsSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, threshold: 0.1 });
+  const [fetchEnabled, setFetchEnabled] = useState(false);
+
+  useEffect(() => {
+    if (isInView) {
+      setFetchEnabled(true);
+    }
+  }, [isInView]);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setFetchEnabled(true), 5000);
+    return () => clearTimeout(timeout);
+  }, []);
+
   const { data: githubData, isLoading, error } = useGitHubProjects({
     perPage: 9,
+    enabled: fetchEnabled,
   });
 
   const githubProjects = useMemo(() => {
