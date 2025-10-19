@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { useEffect } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import headshotAvif320 from "./assets/tan-headshot-4x5-320.avif";
 import headshotAvif640 from "./assets/tan-headshot-4x5-640.avif";
@@ -9,18 +9,19 @@ import headshotWebp640 from "./assets/tan-headshot-4x5-640.webp";
 import headshotWebp960 from "./assets/tan-headshot-4x5-960.webp";
 import headshotJpg640 from "./assets/tan-headshot-4x5-640.jpg";
 import headshotJpgRetina from "./assets/tan-headshot-4x5@3x.jpg";
-import TechStack from "./components/TechStack";
-import About from "./components/About";
-import Contact from "./components/Contact";
 import Navbar from "./components/Navbar";
 import ScrollToTopButton from "./components/ScrollToTopButton";
 import Footer from "./components/Footer";
 import { Analytics } from "@vercel/analytics/react";
-import ProjectsSection from "@/components/ProjectsSection";
 import BackgroundParticles from "@/components/BackgroundParticles";
 import Typewriter from "@/components/Typewriter";
-import PerfAccessibility from "@/components/PerfAccessibility";
 import { useTitle } from "@/hooks/useTitle";
+
+const TechStack = lazy(() => import("./components/TechStack"));
+const About = lazy(() => import("./components/About"));
+const Contact = lazy(() => import("./components/Contact"));
+const ProjectsSection = lazy(() => import("@/components/ProjectsSection"));
+const PerfAccessibility = lazy(() => import("@/components/PerfAccessibility"));
 
 function App() {
   const location = useLocation();
@@ -265,29 +266,39 @@ function App() {
       </motion.div>
 
       <section id="tech" className="w-full mt-2 scroll-mt-36">
-        <TechStack />
+        <Suspense fallback={<div className="py-12" aria-hidden="true" />}> 
+          <TechStack />
+        </Suspense>
       </section>
 
       <section id="about" className="w-full mt-2 scroll-mt-24">
-        <About />
+        <Suspense fallback={<div className="py-10" aria-hidden="true" />}> 
+          <About />
+        </Suspense>
       </section>
 
       {/* Performance section stands alone */}
       <section id="performance" className="w-full mt-2 px-2">
         <div className="max-w-6xl mx-auto">
-          <PerfAccessibility />
+          <Suspense fallback={<div className="py-10" aria-hidden="true" />}> 
+            <PerfAccessibility />
+          </Suspense>
         </div>
       </section>
 
       {/* Projects anchor lands at the actual list */}
       <section id="projects" className="w-full mt-2 px-2">
         <div className="max-w-6xl mx-auto">
-          <ProjectsSection />
+          <Suspense fallback={<div className="py-10" aria-hidden="true" />}> 
+            <ProjectsSection />
+          </Suspense>
         </div>
       </section>
 
       <section id="contact" className="w-full mt-2 scroll-mt-16">
-        <Contact />
+        <Suspense fallback={<div className="py-10" aria-hidden="true" />}> 
+          <Contact />
+        </Suspense>
       </section>
 
       <ScrollToTopButton />

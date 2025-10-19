@@ -32,9 +32,18 @@
   function gtag() {
     dataLayer.push(arguments);
   }
-  gtag('js', new Date());
-  // Defer initial page_view to router tracking
-  gtag('config', 'G-8CDYWW6YVE', { send_page_view: false });
+  function initGA() {
+    gtag('js', new Date());
+    // Defer initial page_view to router tracking
+    gtag('config', 'G-8CDYWW6YVE', { send_page_view: false });
+  }
+  if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(initGA, { timeout: 2000 });
+  } else {
+    window.addEventListener('load', () => {
+      setTimeout(initGA, 1500);
+    }, { once: true });
+  }
 </script>
 
     <!-- Structured Data -->
