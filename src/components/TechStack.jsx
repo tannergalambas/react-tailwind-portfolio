@@ -68,7 +68,7 @@ const TechStack = () => {
                   <Icon className="text-2xl" style={{ color: tool.color }} aria-hidden="true" />
                   <div className="text-left">
                     <div className="font-medium text-slate-100">{tool.label}</div>
-                    <div className="text-xs text-slate-400">{tool.subtitle}</div>
+                    <div className="text-xs text-slate-200">{tool.subtitle}</div>
                   </div>
                 </div>
               </motion.div>

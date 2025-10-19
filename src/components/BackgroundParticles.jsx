@@ -1,27 +1,29 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const BackgroundParticles = () => {
   const [particles, setParticles] = useState([]);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     const generateParticles = () => {
       const newParticles = [];
-      for (let i = 0; i < 50; i++) {
+      const total = reduceMotion ? 12 : 36;
+      for (let i = 0; i < total; i++) {
         newParticles.push({
           id: i,
           x: Math.random() * 100,
           y: Math.random() * 100,
-          size: Math.random() * 4 + 2,
+          size: reduceMotion ? Math.random() * 3 + 1 : Math.random() * 4 + 2,
           animationDelay: Math.random() * 4,
-          duration: Math.random() * 3 + 2,
+          duration: reduceMotion ? Math.random() * 2 + 4 : Math.random() * 3 + 2,
         });
       }
       setParticles(newParticles);
     };
 
     generateParticles();
-  }, []);
+  }, [reduceMotion]);
 
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden">
@@ -35,18 +37,26 @@ const BackgroundParticles = () => {
             width: `${particle.size}px`,
             height: `${particle.size}px`,
           }}
-          animate={{
-            y: [-20, 20, -20],
-            x: [-10, 10, -10],
-            scale: [1, 1.2, 1],
-            opacity: [0.2, 0.5, 0.2],
-          }}
-          transition={{
-            duration: particle.duration,
-            repeat: Infinity,
-            delay: particle.animationDelay,
-            ease: "easeInOut",
-          }}
+          animate={
+            reduceMotion
+              ? { opacity: 0.15 }
+              : {
+                  y: [-20, 20, -20],
+                  x: [-10, 10, -10],
+                  scale: [1, 1.2, 1],
+                  opacity: [0.2, 0.5, 0.2],
+                }
+          }
+          transition={
+            reduceMotion
+              ? { duration: 0 }
+              : {
+                  duration: particle.duration,
+                  repeat: Infinity,
+                  delay: particle.animationDelay,
+                  ease: "easeInOut",
+                }
+          }
         />
       ))}
     </div>
@@ -54,4 +64,3 @@ const BackgroundParticles = () => {
 };
 
 export default BackgroundParticles;
-

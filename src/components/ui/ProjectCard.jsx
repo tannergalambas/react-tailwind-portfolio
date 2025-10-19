@@ -62,13 +62,13 @@ export default function ProjectCard({ project }) {
           </div>
         </div>
       )}
-      <h4 className="text-xl font-semibold mb-2 text-gray-100">
+      <h3 className="text-xl font-semibold mb-2 text-gray-100">
         {project.title}
-      </h4>
+      </h3>
       <p className="text-sm text-gray-300 mb-3">{project.description}</p>
       {languageSegments.length > 0 && (
         <div className="mb-4">
-          <div className="text-xs text-slate-400 uppercase tracking-[0.18em]">
+          <div className="text-xs text-slate-200 uppercase tracking-[0.18em]">
             Languages
           </div>
           <div className="mt-3 h-2 rounded-full bg-slate-800/80 overflow-hidden flex">
@@ -91,7 +91,7 @@ export default function ProjectCard({ project }) {
                   aria-hidden="true"
                 />
                 <span className="font-medium text-slate-200">{segment.label}</span>
-                <span className="text-slate-400">{formatPercent(segment.percent)}</span>
+                <span className="text-slate-200/80">{formatPercent(segment.percent)}</span>
               </div>
             ))}
           </div>

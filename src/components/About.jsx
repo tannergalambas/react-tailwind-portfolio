@@ -87,7 +87,7 @@ const About = () => {
               </motion.div>
             )}
             <div className="font-medium text-slate-100">{h.title}</div>
-            <div className="text-sm text-slate-400">{h.desc}</div>
+            <div className="text-sm text-slate-200">{h.desc}</div>
           </motion.li>
         ))}
       </ul>

@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import headshot4x5 from "./assets/tan-headshot-4x5.jpg";
@@ -18,6 +18,7 @@ import { useTitle } from "@/hooks/useTitle";
 
 function App() {
   const location = useLocation();
+  const reduceMotion = useReducedMotion();
   useTitle("Tanner Galambas | Front‑End Developer — Austin, TX");
 
   // Support deep-linking to sections when arriving from other routes
@@ -65,13 +66,29 @@ function App() {
         {/* Floating geometric shapes */}
         <motion.div
           className="absolute top-20 left-10 w-20 h-20 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full opacity-20 blur-xl"
-          animate={{ y: [-20, 20, -20], x: [-10, 10, -10], scale: [1, 1.2, 1] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          animate={
+            reduceMotion
+              ? { opacity: 0.25 }
+              : { y: [-20, 20, -20], x: [-10, 10, -10], scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }
+          }
+          transition={
+            reduceMotion
+              ? { duration: 0 }
+              : { duration: 6, repeat: Infinity, ease: "easeInOut" }
+          }
         />
         <motion.div
           className="absolute bottom-20 right-10 w-32 h-32 bg-gradient-to-r from-pink-400 to-blue-500 rounded-lg opacity-10 blur-xl rotate-45"
-          animate={{ rotate: [45, 225, 45], scale: [1, 0.8, 1] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          animate={
+            reduceMotion
+              ? { opacity: 0.18 }
+              : { rotate: [45, 225, 45], scale: [1, 0.8, 1], opacity: [0.1, 0.2, 0.1] }
+          }
+          transition={
+            reduceMotion
+              ? { duration: 0 }
+              : { duration: 8, repeat: Infinity, ease: "easeInOut" }
+          }
         />
 
         {/* Main Content - Side by Side Layout */}
@@ -99,8 +116,8 @@ function App() {
                 className="text-xl md:text-2xl text-blue-100 mb-6 min-h-8"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-              >
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
                 <Typewriter
                   className="inline-block whitespace-nowrap"
                   items={[
@@ -137,12 +154,18 @@ function App() {
             >
               <motion.div
                 className="w-72 h-80 md:w-80 md:h-96 rounded-3xl overflow-hidden shadow-2xl glass animate-float relative mx-auto"
-                whileHover={{ scale: 1.05, rotateY: 5, rotateX: 5, transition: { duration: 0.3 } }}
+                whileHover={
+                  reduceMotion
+                    ? {}
+                    : { scale: 1.05, rotateY: 5, rotateX: 5, transition: { duration: 0.3 } }
+                }
               >
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 opacity-20 animate-glow"
-                  animate={{ opacity: [0.2, 0.4, 0.2] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  animate={reduceMotion ? { opacity: 0.2 } : { opacity: [0.2, 0.4, 0.2] }}
+                  transition={
+                    reduceMotion ? { duration: 0 } : { duration: 3, repeat: Infinity, ease: "easeInOut" }
+                  }
                 />
                 <img
                   src={headshot4x5}
@@ -153,7 +176,6 @@ function App() {
                   fetchpriority="high"
                   alt="Tanner Galambas"
                   className="w-full h-full object-cover object-center relative z-10"
-                  loading="lazy"
                 />
               </motion.div>
             </motion.div>
@@ -171,16 +193,18 @@ function App() {
             <motion.a
               href="#contact"
               className="group relative px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-full shadow-lg overflow-hidden"
-              whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)" }}
-              whileTap={{ scale: 0.95 }}
-            >
+            whileHover={
+              reduceMotion ? {} : { scale: 1.05, boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)" }
+            }
+            whileTap={reduceMotion ? {} : { scale: 0.95 }}
+          >
               <span className="relative z-10">Get in Touch</span>
             </motion.a>
             <motion.a
               href="#projects"
               className="px-8 py-3 glass text-white font-semibold rounded-full border border-white/20 hover:bg-white/10 transition-all duration-300"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={reduceMotion ? {} : { scale: 1.05 }}
+              whileTap={reduceMotion ? {} : { scale: 0.95 }}
             >
               View My Work
             </motion.a>
@@ -188,18 +212,20 @@ function App() {
         </motion.div>
 
         {/* Scroll Indicator */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.4 }}
-        >
+        {!reduceMotion && (
           <motion.div
-            className="w-1 h-12 bg-gradient-to-b from-blue-400 to-transparent rounded-full"
-            animate={{ scaleY: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          />
-        </motion.div>
+            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.4 }}
+          >
+            <motion.div
+              className="w-1 h-12 bg-gradient-to-b from-blue-400 to-transparent rounded-full"
+              animate={{ scaleY: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            />
+          </motion.div>
+        )}
       </motion.div>
 
       <section id="tech" className="w-full mt-2 scroll-mt-36">

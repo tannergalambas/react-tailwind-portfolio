@@ -98,7 +98,9 @@ const Navbar = () => {
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="focus:outline-none"
-            aria-label="Toggle menu"
+            aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
           >
             {isOpen ? <HiX size={28} /> : <HiMenu size={28} />}
           </button>
@@ -109,6 +111,7 @@ const Navbar = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            id="mobile-menu"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}

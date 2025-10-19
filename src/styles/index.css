@@ -54,6 +54,14 @@ body {
 .animate-gradient { background-size: 400% 400%; animation: gradient-shift 8s ease infinite; }
 .animate-glow { animation: glow 2s ease-in-out infinite; }
 
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-gradient,
+  .animate-glow {
+    animation: none !important;
+  }
+}
+
 .glass {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);

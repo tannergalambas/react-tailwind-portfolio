@@ -12,17 +12,21 @@ const Footer = () => {
           href="https://github.com/tannergalambas"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-white transition-colors duration-200"
+          className="hover:text-white transition-colors duration-200 flex items-center justify-center"
+          aria-label="GitHub profile"
+          title="GitHub"
         >
-          <FaGithub />
+          <FaGithub aria-hidden="true" />
         </a>
         <a
           href="https://www.linkedin.com/in/tanner-galambas/"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-blue-400 transition-colors duration-200"
+          className="hover:text-blue-400 transition-colors duration-200 flex items-center justify-center"
+          aria-label="LinkedIn profile"
+          title="LinkedIn"
         >
-          <FaLinkedin />
+          <FaLinkedin aria-hidden="true" />
         </a>
       </div>
     </footer>

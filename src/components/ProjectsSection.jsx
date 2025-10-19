@@ -413,7 +413,7 @@ export default function ProjectsSection() {
               />
             ))
           ) : (
-            <div className="col-span-full text-center text-slate-400 py-10">
+            <div className="col-span-full text-center text-slate-200 py-10">
               Loading GitHub projects…
             </div>
           )}
@@ -421,7 +421,7 @@ export default function ProjectsSection() {
 
         {fallbackUsed && (
           <motion.p
-            className="text-center text-sm text-slate-400 -mt-12 mb-16"
+            className="text-center text-sm text-slate-200 -mt-12 mb-16"
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.6, delay: 1.1 }}
@@ -477,7 +477,7 @@ export default function ProjectsSection() {
           </motion.div>
           
           <motion.p
-            className="mt-4 text-sm text-slate-400"
+            className="mt-4 text-sm text-slate-200"
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.8, delay: 1.6 }}

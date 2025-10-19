@@ -1,8 +1,22 @@
 import { motion } from "framer-motion";
 import { Rocket, Accessibility, Smartphone } from "lucide-react";
 import LighthouseScore from "@/components/ui/lighthouse-score.jsx";
+import {
+  DEFAULT_LIGHTHOUSE_SCORES,
+  useLighthouseScores,
+} from "@/hooks/useLighthouseScores.js";
 
 export default function PerfAccessibility() {
+  const {
+    scores,
+    isLoading,
+    usedFallback,
+    error,
+    lastFetchedAt,
+  } = useLighthouseScores({ fallback: DEFAULT_LIGHTHOUSE_SCORES });
+
+  const metrics = scores ?? DEFAULT_LIGHTHOUSE_SCORES;
+
   return (
     <section className="py-10 px-4">
       <div className="max-w-6xl mx-auto text-center">
@@ -33,18 +47,53 @@ export default function PerfAccessibility() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          {[{label:'Performance',score:98},{label:'Accessibility',score:100},{label:'Best Practices',score:100},{label:'SEO',score:98}].map((m, i) => (
-            <div key={m.label} className="flex flex-col items-center text-center">
+          {metrics.map((metric, index) => (
+            <div key={metric.label} className="flex flex-col items-center text-center">
               <div className="relative w-24 h-24 mb-2">
-                <LighthouseScore score={m.score} color="#22c55e" size={96} thickness={6} delay={i*150} />
+                <LighthouseScore
+                  score={metric.score}
+                  color="#22c55e"
+                  size={96}
+                  thickness={6}
+                  delay={index * 150}
+                />
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-lg font-semibold text-white">{m.score}</span>
+                  <span className="text-lg font-semibold text-white">
+                    {metric.score}
+                  </span>
                 </div>
               </div>
-              <div className="text-sm font-semibold text-slate-100">{m.label}</div>
+              <div className="text-sm font-semibold text-slate-100">
+                {metric.label}
+              </div>
             </div>
           ))}
         </motion.div>
+
+        {isLoading && (
+          <p className="text-xs text-slate-500 mb-4">
+            Fetching the latest Lighthouse report…
+          </p>
+        )}
+
+        {usedFallback && !isLoading && (
+          <p className="text-xs text-amber-400/90 mb-4">
+            Showing saved Lighthouse scores. Provide `VITE_LIGHTHOUSE_URL` and
+            `VITE_PAGESPEED_API_KEY` to refresh live results.
+          </p>
+        )}
+
+        {error && !isLoading && (
+          <p className="text-xs text-rose-400/90 mb-4">
+            Lighthouse fetch failed: {error.message}
+          </p>
+        )}
+
+        {lastFetchedAt && (
+          <p className="text-xs text-slate-500 mb-4">
+            Last fetched {lastFetchedAt.toLocaleString()}
+          </p>
+        )}
 
         {/* Feature blurbs */}
         <div className="grid sm:grid-cols-3 gap-8 text-center">
